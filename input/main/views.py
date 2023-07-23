@@ -6,29 +6,30 @@ from .form import *
 
 
 def output_list(request):
-	output_list = Output.objects.order_by('-number')
+	output_list = Output.objects.order_by('-time_create')
 	return render(request, 'main/index.html', {'output_list': output_list})
 
 # *args, **kwargs
-def create_output(request, **kwargs):
+def create_output(request):
 	error = ''
 	if request.method == 'POST':
-		form = OutputForm(request.POST)
+		form = OutputForm(request.POST, request.FILES)
+		img_obj = form.instance
+		print("form.instance", img_obj)
 		if form.is_valid():
-			pk = kwargs
-			print("!!!!!!!!!!!!!!!", pk)
-			# subject_inn = Subject.objects.get(pk=pk)
+			print("11111111111111111111111")
 			form.save()
 			return redirect('/')
 		else:
+			print("22222222222222222222")
 			error = 'Форма неверная'
 	form = OutputForm()
 	data = {
 		'form': form,
 		'error': error
-		# 'subject_inn': subject_inn
 	}
 	return render(request, 'main/create_output.html', data)
+
 
 def output_details(request, pk):
 	output_details = Output.objects.get(pk=pk)

@@ -6,3 +6,4 @@ urlpatterns = [
 	path('create_output', views.create_output, name='create_output'),
 	path('<int:pk>', views.output_details, name='output_details'),
     ]
+

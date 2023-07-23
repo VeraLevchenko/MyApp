@@ -22,8 +22,8 @@ class Output(models.Model):
 	input = models.CharField(max_length=50, default='отсутствует')
 	subject = models.ForeignKey(Subject, on_delete=models.DO_NOTHING)
 	info = models.CharField(max_length=254)
-	doc = models.FileField(blank=False)
-	author = models.CharField(max_length=50)
+	doc = models.FileField(upload_to="doc/%Y/%m/%d")
+	author = models.CharField(max_length=50, editable=True)
 	time_create = models.DateTimeField(auto_now_add=True)
 	time_update = models.DateTimeField(auto_now=True)
 

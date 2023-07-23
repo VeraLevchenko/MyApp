@@ -1,7 +1,7 @@
 {% extends 'main/base.html' %}
 
 {% block content %}
-<form method='POST'>
+<form action="{% url 'create_output' %}" method='post' enctype="multipart/form-data">
     {%csrf_token%}
 
     <div class="w-full max-w-4xl">
@@ -32,7 +32,7 @@
                 </div>
                 <div>
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Адрес</label>
-                    <p class="bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">{{subject_inn}}</p>
+                    <p class="bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">Пока пусто</p>
                 </div>
         </div>
         <div class="px-6 py-2 grid gap-6 mb-10 md:grid-cols-3">
@@ -44,26 +44,25 @@
                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">E-mail</label>
                 <label class="bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">Пока пусто</label>
             </div>
+            <div>
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ИНН</label>
+                <label class="bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">Пока пусто</label>
+            </div>
         </div>
         <div class="px-6 py-4 mb-20 grid gap-6 md:grid-cols-2">
             <div>
                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Вложение</label>
-                <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">{{output_details.doc}}</input>
+                {{form.doc}}
             </div>
             <div>
                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Исполнитель</label>
-                <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">{{output_details.author}}</input>
+                <p>{{form.author}}</p>
             </div>
         </div>
     </div>
-    <div>
-        <a href="/" class="px-10 py-2.5 ml-6 text-white bg-blue-500 hover:bg-blue-800 font-medium rounded-lg text-sm text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Сохранить</a>
-    </div>
+    <button type="submit" class="px-10 py-2.5 ml-6 text-white bg-blue-500 hover:bg-blue-800 font-medium rounded-lg text-sm text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Сохранить</button>
 </form>
- <div>
-     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ИНН</label>
-     <label class="bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">{{subject_inn}}</label>
- </div>
+
 
 {% endblock %}
 
