@@ -1,0 +1,31 @@
+<!doctype html>
+<!--{% load static %}-->
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdn.tailwindcss.com"></script>
+<!--        <link rel="stylesheet" href="{% static 'css/style.css' %}" >-->
+        <title>Главная страница</title>
+    </head>
+    <body>
+       <nav class="py-6 px-6 flex justify-between bg-teal-500 mb-6">
+           <a href="/" class="text-white">Исходящие письма</a>
+
+           <div>
+               <a href="/" class="py-3 px-6 bg-teal-300 rounded-xl text-white">Войти</a>
+           </div>
+       </nav>
+
+       {% block content %}
+       {% endblock %}
+
+
+       <footer class="py-6 text-center mt-6 bg-gray-200">
+           <p class="text-xs text-gray-700">Copyright (c)2023 - Исходящие письма</p>
+       </footer>
+
+    </body>
+</html>
+
+
