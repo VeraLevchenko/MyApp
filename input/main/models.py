@@ -1,16 +1,19 @@
 from django.db import models
-from datetime import date
+from django.utils import timezone
 
 
 class Subject(models.Model):
 	TYPE = [
-		(0, "физлицо"),
-		(1, "юрлицо")
+		("физлицо", "физлицо"),
+		("юрлицо", "юрлицо")
 	]
 
 	name = models.CharField(max_length=254)
+	adress = models.CharField(max_length=254)
+	tel = models.SlugField(max_length=50, default='8(111)1111111')
+	snils = models.SlugField(max_length=50, blank=False)
 	inn = models.IntegerField()
-	type_subject = models.CharField(max_length=254, choices=TYPE)
+	type_subject = models.CharField(max_length=10, choices=TYPE)
 
 	def __str__(self):
 		return f'{self.name}'
@@ -18,7 +21,7 @@ class Subject(models.Model):
 
 class Output(models.Model):
 	number = models.IntegerField(editable=True)
-	data = models.DateField(editable=True, default=date.today())
+	data = models.DateField(editable=True, default=timezone.now)
 	input = models.CharField(max_length=50, default='отсутствует')
 	subject = models.ForeignKey(Subject, on_delete=models.DO_NOTHING)
 	info = models.CharField(max_length=254)

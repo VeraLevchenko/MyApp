@@ -49,7 +49,7 @@
     <div class="px-6 py-4 mb-20 grid gap-6 md:grid-cols-2">
         <div>
             <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Вложение</label>
-            <label class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">{{output_details.doc}}</label>
+            <a href = "/media/{{output_details.doc}}" download="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">{{output_details.doc}}</a>
         </div>
         <div>
             <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Исполнитель</label>
@@ -58,6 +58,7 @@
     </div>
 </div>
 
-<a href="/" class="px-10 py-2.5 ml-6 rounded-lg text-white bg-blue-500 hover:bg-blue-800 font-medium text-sm text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Назад</a>
+<input type="button" onclick="history.back();" value="Назад" class="px-10 py-2.5 ml-6 rounded-lg text-white bg-blue-500 hover:bg-blue-800 font-medium text-sm text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"/>
+<!--<a href="/" class="px-10 py-2.5 ml-6 rounded-lg text-white bg-blue-500 hover:bg-blue-800 font-medium text-sm text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Назад</a>-->
 
 {% endblock %}

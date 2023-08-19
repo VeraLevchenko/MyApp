@@ -1,9 +1,10 @@
 {% extends 'main/base.html' %}
 
 {% block content %}
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
 <form action="{% url 'create_output' %}" method='post' enctype="multipart/form-data">
     {%csrf_token%}
-
     <div class="w-full max-w-4xl">
         <div class="px-6 py-4 grid gap-6 md:grid-cols-2">
             <div>
@@ -28,7 +29,7 @@
         <div class="px-6 py-4 grid gap-6">
                 <div>
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Получатель</label>
-                    <p>{{form.subject}}</p>
+                    <p id="select">{{form.subject}}</p>
                 </div>
                 <div>
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Адрес</label>
@@ -62,6 +63,42 @@
     </div>
     <button type="submit" class="px-10 py-2.5 ml-6 text-white bg-blue-500 hover:bg-blue-800 font-medium rounded-lg text-sm text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Сохранить</button>
 </form>
+<script>
+<!--$("#select").change(function(){-->
+<!--    var variableX = $(this).val();-->
+<!--    alert(variableX);-->
+
+<!--$(document).ready(function() {-->
+<!--    $('select').change(e => alert(e.target.value));-->
+<!--});-->
+
+$(document).ready(function() {
+    $('select').change(function() {
+        alert(this.value);
+        var city_id = this.value;
+        $.ajax({
+           type: "POST",
+           url: "get_data.php",
+           data: {city: city_id},
+           success: function(html){
+             $("#res").html(html);
+           }
+    });
+
+    return false;
+
+    });
+});
+
+<!--function f(){-->
+<!--let a=document.getElementById('select').value;-->
+<!--alert(a); // "msk", если выбрана Москва-->
+<!--}-->
+
+
+
+</script>
+
 
 
 {% endblock %}

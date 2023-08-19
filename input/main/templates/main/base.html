@@ -6,15 +6,21 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://cdn.tailwindcss.com"></script>
 <!--        <link rel="stylesheet" href="{% static 'css/style.css' %}" >-->
+        <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
         <title>Главная страница</title>
+
+         {% block head %}
+         {% endblock %}
+
     </head>
     <body>
-       <nav class="py-6 px-6 flex justify-between bg-teal-500 mb-6">
-           <a href="/" class="text-white">Исходящие письма</a>
-
-           <div>
-               <a href="/" class="py-3 px-6 bg-teal-300 rounded-xl text-white">Войти</a>
+<!--    flex justify-between-->
+       <nav class="px-4 py-1 flex items-center justify-between flex-wrap bg-teal-500">
+           <div class="flex items-center flex-shrink-0 text-white mr-6">
+               <img class="fill-current h-30 mr-1" src="{% static 'images/gerb.png' %}" width="45px">
+               <a href="/" class="px-6 font-semibold text-sm tracking-tight">ИСХОДЯЩИЕ</a>
            </div>
+           <a href="/" class="text-center py-1 px-6 bg-teal-300 rounded-xl text-white">Войти</a>
        </nav>
 
        {% block content %}
