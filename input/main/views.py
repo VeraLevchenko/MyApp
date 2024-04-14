@@ -10,6 +10,7 @@ from .form import *
 from django.utils import timezone
 from django.views.generic import ListView
 # from haystack.query import SearchQuerySet
+from datetime import datetime
 
 class OutputList(ListView):
 	model = Output
@@ -86,18 +87,30 @@ def output_details(request, pk):
 	return render(request, 'main/output_details.html', {'output_details': output_details})
 
 
-class SearchResultsView(ListView):
-	model = Output
-	template_name = 'main/search_results.html'
+# class SearchResultsView(ListView):
+# 	model = Output
+# 	template_name = 'main/search_results.html'
+#
+# 	def get_queryset(self):  # новый
+# 		query = self.request.GET.get("q")
+# 		output_list = Output.objects.filter(
+# 			Q(number__icontains=query) | Q(data__icontains=query) |
+# 			Q(input__icontains=query) | Q(info__icontains=query) |
+# 			Q(subject__name__icontains=query) | Q(author__icontains=query)
+# 		)
+# 		object_list = output_list.order_by('-time_create')
+# 		return object_list
 
-	def get_queryset(self):  # новый
-		query = self.request.GET.get("q")
+
+def get_queryset(request):  # новый
+	query = request.GET.get("q")
+	if query:
+		query_data = datetime.strptime(query, "%Y-%m-%d").date()
 		output_list = Output.objects.filter(
-			Q(number__icontains=query) | Q(data__icontains=query) |
+			Q(number__icontains=query) | Q(data__date=query_data) |
 			Q(input__icontains=query) | Q(info__icontains=query) |
 			Q(subject__name__icontains=query) | Q(author__icontains=query)
 		)
-		object_list = output_list.order_by('-time_create')
-		return object_list
-
-
+	object_list = output_list.order_by('-time_create')
+	print(object_list)
+	return render(request, 'main/search_results.html', {'query': query, 'object_list': object_list})

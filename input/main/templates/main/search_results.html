@@ -5,41 +5,12 @@
 
 {% load static %}
 <nav class="flex justify-between px-6 py-4 mb-6 flex items-center justify-between flex-wrap bg-gray-300">
-    <p class="text-2xl text-gray-700">Список исходящих</p>
-    <form id="form" class="flex items-center" method="get">
-        <input id="s"  name="q" type="search" placeholder="Search..." class="py-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-        <span>
-            <button  type="submit" class="inline-flex items-center py-2 px-3 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                <svg class="w-4 h-4 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/></svg>Search
-            </button>
-        </span>
-    </form>
-    <a href="{% url 'export_users_xls' %}" title="скачать xls" class="px-6 ml-10 bg-gray-300 rounded-xl text-center text-gray-700">
-        <svg class=" fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z"/></svg>
-    </a>
+    <p class="text-2xl text-gray-700">Результаты поиска по "{{ query }}" </p>
+    <div>
+    <a href="{% url 'output_list'%}" class="px-10 py-2.5 ml-6 text-white bg-blue-500 hover:bg-blue-800 font-medium rounded-lg text-sm text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Очистить</a>
+    </div>
 </nav>
 
-
-<!--<script src="{% static '/js/vs1.js' %}"></script>-->
-
-<!--    const form = document.getElementById('form');-->
-<!--    form.addEventListener('submit', getFormValue);-->
-<!--    function getFormValue(){-->
-<!--        const result = form.querySelector('[name="q"]');-->
-<!--        document.getElementById('a').innerHTML = result;-->
-<!--        document.getElementById('a').value = result;-->
-<!--        alert(result);-->
-<!--        }-->
-
-<!--    function getFormValue(){-->
-<!--        result = document.getElementById('s').value;-->
-<!--        document.getElementById("a").innerHTML = result;-->
-<!--        document.getElementById('a').value = result;-->
-<!--        console.log(result)-->
-<!--        }-->
-
-<p id="qqq"></pid>
 
 
 <div class="my-6 relative overflow-x-auto relative overflow-y-auto shadow-md sm:rounded-lg">
