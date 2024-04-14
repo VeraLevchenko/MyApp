@@ -1,18 +1,7 @@
-{% extends 'main/index.html' %}
+{% extends 'main/base.html' %}
 
 
 {% block content %}
-
-{% load static %}
-<nav class="flex justify-between px-6 py-4 mb-6 flex items-center justify-between flex-wrap bg-gray-300">
-    <p class="text-2xl text-gray-700">Результаты поиска по "{{ query }}" </p>
-    <div>
-    <a href="{% url 'output_list'%}" class="px-10 py-2.5 ml-6 text-white bg-blue-500 hover:bg-blue-800 font-medium rounded-lg text-sm text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Очистить</a>
-    </div>
-</nav>
-
-
-
 <div class="my-6 relative overflow-x-auto relative overflow-y-auto shadow-md sm:rounded-lg">
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -42,7 +31,7 @@
         </thead>
         <tbody>
             {% for el in object_list %}
-            <tr onclick="document.location='../{{el.id}}'" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600">
+            <tr onclick="document.location={{el.id}}" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600">
                 <td class="px-6 py-4">
                     {{ el.number }}
                 </td>
@@ -72,5 +61,7 @@
     </table>
 </div>
 
-{% endblock %}
+<input type="button" onclick="history.back();" value="Назад" class="px-10 py-2.5 ml-6 rounded-lg text-white bg-blue-500 hover:bg-blue-800 font-medium text-sm text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"/>
+<!--<a href="/" class="px-10 py-2.5 ml-6 rounded-lg text-white bg-blue-500 hover:bg-blue-800 font-medium text-sm text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Назад</a>-->
 
+{% endblock %}

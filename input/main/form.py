@@ -3,6 +3,8 @@ import datetime
 from django.forms import ModelForm, TextInput, DateInput, ChoiceField
 from .models import Output, Subject
 from datetime import datetime
+from django import forms
+
 
 class OutputForm(ModelForm):
 	class Meta:
@@ -32,5 +34,9 @@ class OutputForm(ModelForm):
 			})
 		}
 
-
+class PersonFilterForm(forms.Form):
+    input = forms.CharField(required=False, label='Исходящий номер')
+    subject = forms.CharField(required=False, label='Организация')
+    info = forms.IntegerField(required=False, label='Краткое содержание')
+    data = forms.DateField(required=False, label='Исходящая дата', widget=forms.TextInput(attrs={'type': 'date'}))
 

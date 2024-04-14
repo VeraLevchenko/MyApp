@@ -12,11 +12,13 @@ from django.views.generic import ListView
 # from haystack.query import SearchQuerySet
 from datetime import datetime
 
-class OutputList(ListView):
-	model = Output
-	template_name = 'main/index.html'  # по умолчанию object_list.html
-	context_object_name = 'output_list' # по умолчанию object_list
-	queryset = Output.objects.order_by('-time_create')
+
+
+# class OutputList(ListView):
+# 	model = Output
+# 	template_name = 'main/index.html'  # по умолчанию object_list.html
+# 	context_object_name = 'output_list' # по умолчанию object_list
+# 	queryset = Output.objects.order_by('-time_create')
 
 
 
@@ -89,7 +91,7 @@ def output_details(request, pk):
 
 # class SearchResultsView(ListView):
 # 	model = Output
-# 	template_name = 'main/search_results.html'
+# 	template_name = 'main/result.html'
 #
 # 	def get_queryset(self):  # новый
 # 		query = self.request.GET.get("q")
@@ -102,15 +104,51 @@ def output_details(request, pk):
 # 		return object_list
 
 
-def get_queryset(request):  # новый
-	query = request.GET.get("q")
-	if query:
-		query_data = datetime.strptime(query, "%Y-%m-%d").date()
-		output_list = Output.objects.filter(
-			Q(number__icontains=query) | Q(data__date=query_data) |
-			Q(input__icontains=query) | Q(info__icontains=query) |
-			Q(subject__name__icontains=query) | Q(author__icontains=query)
-		)
-	object_list = output_list.order_by('-time_create')
-	print(object_list)
-	return render(request, 'main/search_results.html', {'query': query, 'object_list': object_list})
+# def get_queryset(request):  # новый
+# 	query = request.GET.get("q")
+# 	if query:
+# 		query_data = datetime.strptime(query, "%Y-%m-%d").date()
+# 		output_list = Output.objects.filter(
+# 			Q(number__icontains=query) | Q(data__date=query_data) |
+# 			Q(input__icontains=query) | Q(info__icontains=query) |
+# 			Q(subject__name__icontains=query) | Q(author__icontains=query)
+# 		)
+# 	object_list = output_list.order_by('-time_create')
+# 	print(object_list)
+# 	return render(request, 'main/search_results.html', {'query': query, 'object_list': object_list})
+
+def get_queryset(request):
+	form = PersonFilterForm(request.GET)
+	if form.is_valid():
+		input = form.cleaned_data.get('input')
+		subject = form.cleaned_data.get('subject')
+		info = form.cleaned_data.get('info')
+		data = form.cleaned_data.get('data')
+		print(data)
+		object_list = Output.objects.all()
+		if input in request.GET:
+			object_list = object_list.filter(input__icontains=input)
+		if subject in request.GET:
+			object_list = object_list.filter(subject__icontains=subject)
+		if info in request.GET:
+			object_list = object_list.filter(info=info)
+		if data in request.GET:
+			print("kvfkvkgvkv")
+			object_list = object_list.filter(data=data)
+
+		ids = ','.join([str(obj.id) for obj in object_list])
+		return redirect(f'/result/?ids={ids}')
+	item = Output.objects.all()
+	return render(request, 'main/index.html', {'form': form, 'object_list': item})
+
+
+def result(request):
+	ids = request.GET.get('ids', '')
+
+	if ids:
+		ids = [int(id) for id in ids.split(',')]
+		object_list = Output.objects.filter(id__in=ids)
+	else:
+		object_list = []
+
+	return render(request, 'main/result_list.html', {'object_list': object_list})
